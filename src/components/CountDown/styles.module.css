@@ -1,0 +1,8 @@
+.container{
+  font-size: clamp(8rem,30vw, 16rem);
+  font-weight: bold;
+  align-items: center;
+  text-align: center;
+  line-height:1.4 ;
+  color: var(--text-default);
+}

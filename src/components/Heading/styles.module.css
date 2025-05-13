@@ -1,0 +1,12 @@
+.heading{
+   margin: 17.9rem 0;
+   font-size: 3.7rem;
+  text-align: center;
+  color:var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+  
+}
+   
