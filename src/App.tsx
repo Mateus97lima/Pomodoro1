@@ -6,9 +6,12 @@ import './styles/global.css'
 
 
 
-import { Home } from './pages/Home';
+
 import { TaskContextProvider } from './Contexts/TaskContext/TaskContextProvider';
-import { Bounce, ToastContainer } from 'react-toastify';
+
+import { MessageContainer } from './components/MessageContainer';
+import { MainRouters } from './Routers/MainRouters';
+
 
 
 
@@ -17,22 +20,9 @@ export function App(){
   
   return (
     <TaskContextProvider>
-      <Home />
-
-      <ToastContainer
-position="top-center"
-autoClose={10000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick={true}
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-transition={Bounce}
-/>
-
+  <MessageContainer>
+<MainRouters/>
+  </MessageContainer>
    </TaskContextProvider>
     
   )

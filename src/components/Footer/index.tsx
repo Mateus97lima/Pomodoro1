@@ -1,4 +1,5 @@
  
+import { RouterLink } from '../RoutLinks';
 import styles from './styles.module.css'
  
 
@@ -8,8 +9,8 @@ import styles from './styles.module.css'
   
     return (
        <footer className={styles.foot}>
-        <a href="#">Entenda como funciona a técnica de Pomodoro 🍅 </a>
-        <a href="#">Chronos Pomodoro &copy;{new Date().getFullYear()} - feito com 💙</a>
+        <RouterLink href="/About-Pomodoro">Entenda como funciona a técnica de Pomodoro 🍅 </RouterLink>
+        <RouterLink href="#">Chronos Pomodoro &copy;{new Date().getFullYear()} - feito com 💙</RouterLink>
        </footer>
     ); 
 }
