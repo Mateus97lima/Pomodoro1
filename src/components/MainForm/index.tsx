@@ -20,6 +20,7 @@ import { showMessage } from "../../adapters/showMessage";
 export function MainForm() {
   const { state, dispatch } = useTaskContext();
   const TaskInput = useRef<HTMLInputElement>(null);
+  const lastTaskName = state.tasKs[state.tasKs.length -1]?.name || '';
 
   const nextCyles = getNextCycles(state.currentCycle);
   const nextSeconds = getNextCyclesType(nextCyles);
@@ -66,6 +67,7 @@ export function MainForm() {
           placeholder="Diga sua missão de hoje"
           ref={TaskInput}
           disabled={!!state.activeTask}
+          defaultValue={lastTaskName}
         />
       </div>
 

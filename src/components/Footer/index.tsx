@@ -9,8 +9,8 @@ import styles from './styles.module.css'
   
     return (
        <footer className={styles.foot}>
-        <RouterLink href="/About-Pomodoro">Entenda como funciona a técnica de Pomodoro 🍅 </RouterLink>
-        <RouterLink href="#">Chronos Pomodoro &copy;{new Date().getFullYear()} - feito com 💙</RouterLink>
+        <RouterLink href="/About-Pomodoro/">Entenda como funciona a técnica de Pomodoro 🍅 </RouterLink>
+        <RouterLink href="/">Chronos Pomodoro &copy;{new Date().getFullYear()} - feito com 💙</RouterLink>
        </footer>
     ); 
 }

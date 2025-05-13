@@ -21,7 +21,7 @@ return(
         <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>}/>
-          <Route path='/ About-Pomodoro' element={<AboutPomodoro />}/>
+          <Route path='/About-Pomodoro' element={<AboutPomodoro />}/>
           <Route path='*' element={<NotFood />}/>
         </Routes>
         <ScroolLoop/>
