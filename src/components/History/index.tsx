@@ -9,11 +9,33 @@ import styles from "./style.module.css";
 import { useTaskContext } from "../../Contexts/TaskContext/useTaskContext";
 import { FormatDate } from "../../utils/formattedDate";
 import { getTaskState } from "../../utils/getTaskStatus";
-import { sortTasks } from "../../utils/shortTaskDate";
+import {  sortTasks, SortTasksOptions } from "../../utils/shortTaskDate";
+import { useState } from "react";
 
 export function History() {
   const { state } = useTaskContext();
-  const shortTaskDate = sortTasks({tasks:state.tasKs});
+  const [sortTaskOption, setshortTaskOption] = useState<SortTasksOptions>(
+    () => {
+ return{
+  tasks:sortTasks({tasks:state.tasKs}),
+  field:'startDate',
+  direction:'desc'
+ };
+  });
+
+  function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
+    const newDirection = sortTaskOption.direction === 'desc' ? 'asc' : 'desc';
+
+  setshortTaskOption({
+    tasks:sortTasks({
+      direction:newDirection,
+      tasks:sortTaskOption.tasks,
+      field,
+    }),
+    direction:newDirection,
+    field,
+  })
+  }
 
   return (
     <MainTemplate>
@@ -35,17 +57,17 @@ export function History() {
         <div className={styles.responsiveTable}>
           <table>
             <thead>
-              <tr>
-                <th>Tarefa</th>
-                <th>Duração</th>
-                <th>Data</th>
-                <th>Status</th>
-                <th>Tipos</th>
+              <tr >
+                <th onClick={()=> handleSortTasks({field:'name'})} className={styles.thsort}>Tarefa ↕</th>
+                <th onClick={()=> handleSortTasks({field:'duration'})} className={styles.thsort}>Duração ↕</th>
+                <th onClick={()=> handleSortTasks({field:'startDate'})} className={styles.thsort}>Data ↕</th>
+                <th> Status ↕</th>
+                <th>Tipos ↕</th>
               </tr>
             </thead>
 
             <tbody>
-              {shortTaskDate.map((task) => {
+              {sortTaskOption.tasks.map((task) => {
                     const taskTypeDictionary = {
                   workTime: 'Foco',
                   shortBreakTime: 'Descanso curto',
