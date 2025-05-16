@@ -10,10 +10,12 @@ import { useTaskContext } from "../../Contexts/TaskContext/useTaskContext";
 import { FormatDate } from "../../utils/formattedDate";
 import { getTaskState } from "../../utils/getTaskStatus";
 import {  sortTasks, SortTasksOptions } from "../../utils/shortTaskDate";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { TaskActionTypes } from "../../Contexts/TaskContext/TaskAction";
 
 export function History() {
-  const { state } = useTaskContext();
+  const { state,dispatch } = useTaskContext();
+  const handTask = state.tasKs.length > 0;
   const [sortTaskOption, setshortTaskOption] = useState<SortTasksOptions>(
     () => {
  return{
@@ -22,6 +24,17 @@ export function History() {
   direction:'desc'
  };
   });
+
+  useEffect(() => {
+    setshortTaskOption(prevState => ({
+      ...prevState,
+      tasks: sortTasks({
+        tasks: state.tasKs,
+        direction: prevState.direction,
+        field: prevState.field,
+      }),
+    }));
+  }, [state.tasKs]);
 
   function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
     const newDirection = sortTaskOption.direction === 'desc' ? 'asc' : 'desc';
@@ -37,23 +50,36 @@ export function History() {
   })
   }
 
+  function handleResertHistory (){
+    if(!confirm('Tem Certeza que quer Apagar')) return
+
+   dispatch({type:TaskActionTypes.RESET_STATE})
+  }
+
+  
+
   return (
     <MainTemplate>
       <Container>
         <Heading>
           <span>History</span>
+           {handTask && (
           <span className={styles.buttonContainer}>
+           
             <DefaultButton
               icon={<TrashIcon />}
               color="red"
               aria-labelledby="Apagar History"
               title="Apagar todo History"
+              onClick={handleResertHistory}
             />
           </span>
+          )}
         </Heading>
       </Container>
 
       <Container>
+        {handTask &&(
         <div className={styles.responsiveTable}>
           <table>
             <thead>
@@ -86,6 +112,10 @@ export function History() {
             </tbody>
           </table>
         </div>
+        )}
+        {!handTask && (
+          <p style={{textAlign:'center', fontSize:'2rem',fontWeight:'bold'}}>Nenhuma Task inicianda</p>
+        )}
       </Container>
     </MainTemplate>
   );
