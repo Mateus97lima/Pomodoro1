@@ -11,10 +11,15 @@ import { FormatDate } from "../../utils/formattedDate";
 import { getTaskState } from "../../utils/getTaskStatus";
 import {  sortTasks, SortTasksOptions } from "../../utils/shortTaskDate";
 import { useEffect, useState } from "react";
+
+
+import { showMessage } from "../../adapters/showMessage";
 import { TaskActionTypes } from "../../Contexts/TaskContext/TaskAction";
+
 
 export function History() {
   const { state,dispatch } = useTaskContext();
+  const [confirmClearHistory ,setConfirmClearHistory] =useState(false)
   const handTask = state.tasKs.length > 0;
   const [sortTaskOption, setshortTaskOption] = useState<SortTasksOptions>(
     () => {
@@ -36,6 +41,18 @@ export function History() {
     }));
   }, [state.tasKs]);
 
+  useEffect(() =>{
+    if(!confirmClearHistory) return
+  
+    setConfirmClearHistory(false);
+
+    dispatch({type:TaskActionTypes.RESET_STATE});
+  },[confirmClearHistory,dispatch]);
+
+  useEffect(()=>{
+    showMessage.dismiss();
+  },[]);
+
   function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
     const newDirection = sortTaskOption.direction === 'desc' ? 'asc' : 'desc';
 
@@ -51,9 +68,11 @@ export function History() {
   }
 
   function handleResertHistory (){
-    if(!confirm('Tem Certeza que quer Apagar')) return
-
-   dispatch({type:TaskActionTypes.RESET_STATE})
+    showMessage.dismiss()
+   showMessage.confirm('to switch off History?',(confirmation) =>{
+   setConfirmClearHistory(confirmation); 
+   })
+ 
   }
 
   

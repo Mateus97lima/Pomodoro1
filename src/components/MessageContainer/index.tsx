@@ -12,13 +12,13 @@ export function MessageContainer({children}:MessageContainerProps){
 
              <ToastContainer
 position="top-center"
-autoClose={10000}
+autoClose={10000} //carrega aquela barrinha de tempo//
 hideProgressBar={false}
 newestOnTop={false}
-closeOnClick={true}
+closeOnClick={true}// clica e fecha//
 rtl={false}
 pauseOnFocusLoss
-draggable
+draggable // arrasta pro lado e sumi a barra//
 pauseOnHover
 theme="light"
 transition={Bounce}

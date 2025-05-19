@@ -51,9 +51,12 @@ export function MainForm() {
     };
 
     dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
+    showMessage.sucess('Task Started');
   }
 
   function handleClickInterrup() {
+    showMessage.dismiss()
+    showMessage.error('Task Closed')
     dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
   }
 
