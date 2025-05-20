@@ -7,19 +7,25 @@ import { Heading } from '../../components/Heading';
 
 
  import { MainTemplate } from '../../templades/MainTemplate';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTaskContext } from '../../Contexts/TaskContext/useTaskContext';
 import { showMessage } from '../../adapters/showMessage';
+import { TaskActionTypes } from '../../Contexts/TaskContext/TaskAction';
  
 
 
 
 
  export function Setting() {
-     const {state} = useTaskContext()
+
+  useEffect(()=>{
+      document.title = 'Settings - Chronos Pomodoro'
+    },[]);
+
+     const {state,dispatch} = useTaskContext()
      const workTimeInput = useRef<HTMLInputElement >(null); 
      const shortBreakTimeInput= useRef<HTMLInputElement >(null); 
-     const longoBreakTimeInput = useRef<HTMLInputElement >(null); 
+     const longBreakTimeInput = useRef<HTMLInputElement >(null); 
 
   function handleSaveSettings(e:React.FormEvent<HTMLFormElement>) {
   e.preventDefault()
@@ -28,9 +34,9 @@ import { showMessage } from '../../adapters/showMessage';
   const formError = []
   const workTime = Number(workTimeInput.current?.value);
   const shortBreakTime = Number(shortBreakTimeInput.current?.value);
-  const longoBreakTime = Number(longoBreakTimeInput.current?.value);
+  const longBreakTime = Number(longBreakTimeInput.current?.value);
 
-if(isNaN(workTime) || isNaN(shortBreakTime) || isNaN(longoBreakTime)){
+if(isNaN(workTime) || isNaN(shortBreakTime) || isNaN(longBreakTime)){
   formError.push('Digite Somente números')
   
 }
@@ -43,7 +49,7 @@ if(shortBreakTime < 1 || shortBreakTime > 30){
   formError.push('escolha o tempo entre 1 a 30mn para o descanso curto')
 }
 
-if(longoBreakTime < 1 || longoBreakTime > 60){
+if(longBreakTime < 1 || longBreakTime > 60){
   formError.push('escolha o tempo entre 1 a 60mn para o descanso longo')
 }
 
@@ -53,6 +59,16 @@ if(formError.length > 0){
   });
   return;
 }
+    dispatch({
+      type: TaskActionTypes.CHANGE_SETTINGS,
+      payload: {
+        workTime,
+        shortBreakTime,
+        longBreakTime,
+      },
+    });
+    showMessage.sucess('Configurações salvas');
+
   }
 
    return (
@@ -78,7 +94,7 @@ if(formError.length > 0){
         </div>
 
          <div className="formRow">
-          <DefaultInput id='longoBreakTime' labelText='descanso longo' ref={longoBreakTimeInput} defaultValue={state.config.longBreakTime} type='number'/>
+          <DefaultInput id='longoBreakTime' labelText='descanso longo' ref={longBreakTimeInput} defaultValue={state.config.longBreakTime} type='number'/>
         </div>
 
         <div className="formRow">

@@ -18,6 +18,11 @@ import { TaskActionTypes } from "../../Contexts/TaskContext/TaskAction";
 
 
 export function History() {
+
+  useEffect(()=>{
+    document.title = 'History - Chronos Pomodoro'
+  },[]);
+
   const { state,dispatch } = useTaskContext();
   const [confirmClearHistory ,setConfirmClearHistory] =useState(false)
   const handTask = state.tasKs.length > 0;
