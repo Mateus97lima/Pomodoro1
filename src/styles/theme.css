@@ -35,8 +35,7 @@
  
    --disabled: #555f7d;
    --text-disabled: #aab3cc;
-<<<<<<< HEAD
-=======
+
 
    --toastify-color-light: var(--text-default);
    --toastify-color-dark: var(--text-default);
@@ -48,7 +47,6 @@
    --toastify-text-color-dark: #e6e9f0;
    --toastify-color-progress-light: var(--primary);
    --toastify-color-progress-dark: var(--primary);
->>>>>>> 109f9ff (atualizações)
 }
 :root[data-theme='light'] {
     --gray-100: #0a0f1a;
@@ -66,9 +64,8 @@
   
     --link-color: #0b8a60;
     --link-hover: #065f46;
-<<<<<<< HEAD
-=======
+
     --toastify-text-color-light: #e6e9f0;
     --toastify-text-color-dark: #e6e9f0;
->>>>>>> 109f9ff (atualizações)
+
   }
