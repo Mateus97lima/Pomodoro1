@@ -14,12 +14,12 @@ export function Tips() {
     shortBreakTime: <span> Descanse por</span>,
   };
   const tipsForNoActivoTask = {
-    workTime: <span>próximo ciclo é {state.config.workTime}min </span>,
+    workTime: <span>Próximo ciclo é em {state.config.workTime} min </span>,
     longBreakTime: (
-      <span>Próximo descanso será longo{state.config.longBreakTime}min </span>
+      <span>Próximo descanso longo é em {state.config.longBreakTime} min </span>
     ),
     shortBreakTime: (
-      <span>Próximo descaso é {state.config.shortBreakTime}min</span>
+      <span>Próximo descanso é em {state.config.shortBreakTime} min</span>
     ),
   };
 
